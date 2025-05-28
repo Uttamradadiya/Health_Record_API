@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'urls' 
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -58,7 +58,6 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'wsgi.application'  # Optional; needed if you deploy with gunicorn/uwsgi
 
 # Database
 DATABASES = {
