@@ -54,7 +54,9 @@ AUTH_USER_MODEL = 'users.User'
 
 ### Migrate and Run
 ```bash
-python manage.py makemigrations
+# Recreate all migrations
+python manage.py makemigrations users
+python manage.py makemigrations health_api
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver

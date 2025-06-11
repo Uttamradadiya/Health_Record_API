@@ -2,6 +2,7 @@ from celery import shared_task
 from django.core.mail import send_mail
 from .models import HealthRecord
 
+# This background task sends the notification email in a non-blocking way using Celery.
 def notify_email_text(patient_name):
     return f"You’ve been assigned to a new patient: {patient_name}"
 

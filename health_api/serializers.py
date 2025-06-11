@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import HealthRecord, Comment
 
+# The `HealthRecordSerializer` includes nested comments (read-only). This prevents users from faking comments or assigning themselves.
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment

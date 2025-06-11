@@ -4,6 +4,10 @@ from .models import HealthRecord, Comment
 from .serializers import HealthRecordSerializer, CommentSerializer
 from .permissions import IsPatientOwner, IsAssignedDoctor
 
+# ViewSet logic ensures role-based filtering:
+# Patients can only see or modify their own records.
+# Doctors only see assigned patients.
+# On creation, the patient is set automatically.
 class HealthRecordViewSet(viewsets.ModelViewSet):
     queryset = HealthRecord.objects.all()
     serializer_class = HealthRecordSerializer
@@ -18,7 +22,7 @@ class HealthRecordViewSet(viewsets.ModelViewSet):
         return HealthRecord.objects.none()
 
     def create(self, request, *args, **kwargs):
-        # 🔐 Only patients can create records
+        # Only patients can create records
         if request.user.role != 'PATIENT':
             return Response(
                 {'detail': 'Only patients can create health records.'},
@@ -29,6 +33,7 @@ class HealthRecordViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(patient=self.request.user)
 
+# Ensures doctors only comment on valid assignments.
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
