@@ -2,6 +2,9 @@ from rest_framework import serializers
 from .models import User
 from django.contrib.auth.password_validation import validate_password
 
+#`UserSerializer` ensures that users can register via the API using their username, email, password, and role.
+# The password is securely hashed using Django's built-in user creation.
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
